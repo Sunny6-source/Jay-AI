@@ -174,20 +174,20 @@
   <div class="cfg-card">
     <div class="cfg-eye">Personal Intelligence</div>
     <div class="cfg-title">JAY</div>
-    <p class="cfg-sub">100% free. Powered by OpenRouter + Llama 3.3 70B + browser voice. No credit card needed.</p>
+    <p class="cfg-sub">100% free. Powered by Groq (Llama 3.3 70B) — fastest free AI API. No credit card needed.</p>
     <div class="free-badge">✦ Completely Free</div>
 
     <div class="steps">
-      <b>1.</b> Go to <a href="https://openrouter.ai" target="_blank">openrouter.ai</a> → Sign up (Google works)<br>
-      <b>2.</b> Click your avatar (top right) → <b>Keys</b> → <b>Create Key</b><br>
-      <b>3.</b> Copy the key — starts with <b>sk-or-v1-</b><br>
+      <b>1.</b> Go to <a href="https://console.groq.com" target="_blank">console.groq.com</a> → Sign up (Google works)<br>
+      <b>2.</b> Left sidebar → <b>API Keys</b> → <b>Create API Key</b><br>
+      <b>3.</b> Copy the key — starts with <b>gsk_</b><br>
       <b>4.</b> Paste below and hit Launch
     </div>
 
     <div class="field">
-      <label>OpenRouter API Key</label>
-      <input type="password" id="or-key" placeholder="sk-or-v1-..." autocomplete="off" />
-      <div class="hint">Free models included. No billing required to get started.</div>
+      <label>Groq API Key</label>
+      <input type="password" id="or-key" placeholder="gsk_..." autocomplete="off" />
+      <div class="hint">Free tier: 14,400 requests/day. No billing required.</div>
     </div>
 
     <button class="launch-btn" onclick="launch()">Launch JAY →</button>
@@ -206,7 +206,7 @@
       <div class="brand-name"><span>J</span>AY</div>
     </div>
     <div class="hdr-right">
-      <div class="pill"><span class="pdot"></span>Free · OpenRouter</div>
+      <div class="pill"><span class="pdot"></span>Free · Groq</div>
       <button class="ibtn" onclick="toggleVP()" title="Voice settings">🔊</button>
       <button class="ibtn" onclick="clearChat()" title="New chat">↺</button>
       <button class="ibtn" onclick="showCfg()" title="Settings">⚙</button>
@@ -251,7 +251,7 @@
       </button>
     </div>
     <div class="input-meta">
-      <span>OpenRouter · Llama 3.3 70B · Free · Voice: Browser</span>
+      <span>Groq · Llama 3.3 70B · Free · Voice: Browser</span>
       <span id="vlabel"></span>
     </div>
   </div>
@@ -259,8 +259,8 @@
 
 <script>
 // ── CONFIG ────────────────────────────────────────────────────────────────────
-const API_URL = 'https://openrouter.ai/api/v1/chat/completions';
-const MODEL = 'mistralai/mistral-7b-instruct:free';
+const API_URL = 'https://api.groq.com/openai/v1/chat/completions';
+const MODEL   = 'llama-3.3-70b-versatile';
 const HAS_TTS = (typeof window !== 'undefined') && ('speechSynthesis' in window);
 const HAS_STT = (typeof window !== 'undefined') && !!(window.SpeechRecognition || window.webkitSpeechRecognition);
 
@@ -398,9 +398,7 @@ async function send(override) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`,
-        'HTTP-Referer': 'https://jay-ai.local',
-        'X-Title': 'JAY Personal AI'
+        'Authorization': `Bearer ${apiKey}`
       },
       body: JSON.stringify({
         model: MODEL,
